@@ -14,6 +14,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.0" % "test",
   "com.squareup.okhttp" % "okhttp" % "2.4.0",
   "com.typesafe.play" %% "play-json" % "2.5.10",
+  "org.sangria-graphql" %% "sangria-play-json" % "0.3.3",
   "com.gu" % "content-api-models-scala" % "10.22"
 )
 

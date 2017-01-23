@@ -1,6 +1,7 @@
 package data
 
-import play.api.libs.json.JsValue
+import sangria.marshalling.playJson._
+import play.api.libs.json._
 import support.CAPI
 
 object AtomType extends Enumeration {
@@ -14,14 +15,16 @@ case class Atom(
                data: AtomData
                )
 
-trait AtomData
+
+sealed trait AtomData
 
 case class MediaAtomData(title: String) extends AtomData
 case class CtaAtomData(url: String) extends AtomData
 case class ExplainerAtomData(title: String, body: String) extends AtomData
 
-object Atom {
 
+
+object Atom {
   def fromCapiJson(json: JsValue): Atom = {
 
     val atomType = AtomType.withName((json \ "atomType").as[String].capitalize)

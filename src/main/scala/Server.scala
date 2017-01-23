@@ -56,9 +56,17 @@ object Server extends App {
         }
       }
     } ~
-    get {
+      (get & path("graphiql")) {
       getFromResource("graphiql.html")
-    }
+    } ~
+      pathPrefix("client") {
+        getFromDirectory("./client")
+      } ~
+      get {
+        getFromResource("index.html")
+      }
 
-  Http().bindAndHandle(route, "0.0.0.0", sys.props.get("http.port").fold(8080)(_.toInt))
+
+
+  Http().bindAndHandle(route, "0.0.0.0", sys.props.get("http.port").fold(9000)(_.toInt))
 }

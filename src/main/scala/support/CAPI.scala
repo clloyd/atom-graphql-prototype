@@ -9,7 +9,7 @@ import data._
 object CAPI {
   val client = new OkHttpClient();
 
-  val capiUrl = "ADD A CAPI ADDRESS"
+  val capiUrl = "http://internal.content.guardianapis.com"
 
 
   def getAtom(id: String, atomType: String): Option[Atom] = {

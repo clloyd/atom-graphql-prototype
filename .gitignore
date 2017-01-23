@@ -4,3 +4,7 @@ project/boot/
 
 .idea/
 .idea_modules/
+
+node_modules
+*.min.js
+*.map

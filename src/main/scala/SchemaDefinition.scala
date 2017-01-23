@@ -50,7 +50,7 @@ object SchemaDefinition {
   )
 
   val ExplainerAtomDataType = ObjectType(
-    name = "ExplainerAtom",
+    name = "ExplainerAtomData",
     description = "An Explainer Atom",
     fields[AtomRepo, ExplainerAtomData](
       Field("title", StringType,
