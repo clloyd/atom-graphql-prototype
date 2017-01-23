@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build-dev": "webpack ./app.js ./app.min.js --config webpack.conf.js --watch"
+    "build-dev": "webpack ./client/app.js ./client/app.min.js --config ./client/webpack.conf.js --watch"
   },
   "author": "",
   "license": "ISC",
