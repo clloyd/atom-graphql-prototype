@@ -57,4 +57,8 @@ class AtomRepo {
   def getAtom(id: String, atomType: String): Option[Atom] = {
     CAPI.getAtom(id, atomType)
   }
+
+  def searchAtoms(query: String): List[Atom] = {
+    CAPI.searchAtom(query)
+  }
 }

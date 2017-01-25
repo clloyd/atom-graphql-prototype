@@ -95,15 +95,19 @@ object SchemaDefinition {
 
   val ID = Argument("id", StringType, description = "id of the atom")
   val ATOMTYPE = Argument("atomType", StringType, description = "type of the atom")
+  val QUERYSTRING = Argument("query", StringType, description = "text to search for")
 
-  val Query = ObjectType(
+  val AtomQuery = ObjectType(
     "Query", fields[AtomRepo, Unit](
       Field("atom", OptionType(Atom),
         arguments = ID :: ATOMTYPE :: Nil,
-        resolve = ctx => ctx.ctx.getAtom(ctx arg ID, ctx arg ATOMTYPE))
+        resolve = ctx => ctx.ctx.getAtom(ctx arg ID, ctx arg ATOMTYPE)),
+      Field("search", ListType(Atom),
+        arguments = QUERYSTRING :: Nil,
+        resolve = ctx => ctx.ctx.searchAtoms(ctx arg QUERYSTRING)
+      )
     ))
 
-
-  val AtomSchema = Schema(Query)
+  val AtomSchema = Schema(AtomQuery)
 }
 

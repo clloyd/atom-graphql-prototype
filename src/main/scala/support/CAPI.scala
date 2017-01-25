@@ -9,7 +9,7 @@ import data._
 object CAPI {
   val client = new OkHttpClient();
 
-  val capiUrl = "http://internal.content.guardianapis.com"
+  val capiUrl = "ADD A URL"
 
 
   def getAtom(id: String, atomType: String): Option[Atom] = {
@@ -31,5 +31,27 @@ object CAPI {
         None
       }
     }
+  }
+
+  def searchAtom(query: String): List[Atom] = {
+    val req = new Builder()
+      .url(s"$capiUrl/atoms?types=cta,explainer,media&searchFields=data.title,labels&q=$query")
+      .build()
+
+    val res = client.newCall(req).execute()
+
+    res.code match {
+      case 200 => {
+        val json = Json.parse(res.body().string())
+        val resultsJson = (json \ "response" \ "results").as[List[JsValue]]
+
+        resultsJson.map(resultJson => Atom.fromCapiJson(resultJson))
+      }
+      case c => {
+        println(s"failed to search")
+        List()
+      }
+    }
+
   }
 }
